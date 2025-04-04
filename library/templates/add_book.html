@@ -1,0 +1,153 @@
+{% extends 'admin_navbar.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+
+<style>
+    /* General Container Styling */
+    .container {
+        max-width: 700px;
+        margin-top: 60px;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Title Styling */
+    .container h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    /* Style for form labels */
+    .form-group label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+    }
+
+    /* Form input fields */
+    .form-control {
+        border-radius: 8px;
+        padding: 15px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+    }
+
+    /* Input focus effect */
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(38, 143, 255, 0.3);
+        background-color: #ffffff;
+    }
+
+    /* Add subtle hover effect on the form fields */
+    .form-control:hover {
+        background-color: #fafafa;
+    }
+
+    /* Button Styling */
+    .btn-outline-primary {
+        border-radius: 8px;
+        font-size: 1.1rem;
+        padding: 12px 25px;
+        font-weight: 600;
+        background-color: #ffffff;
+        color: #ff0055;
+        border: 2px solid #ff0066;
+        transition: all 0.3s ease;
+    }
+
+    /* Button Hover Effect */
+    .btn-outline-primary:hover {
+        background-color: #ff005d;
+        color: white;
+        border-color: #ff0073;
+    }
+
+    /* Button Focus Effect */
+    .btn-outline-primary:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255, 38, 96, 0.5);
+    }
+
+    /* Add margin between form fields */
+    .row.mt-4 {
+        margin-top: 20px;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+        .container {
+            margin-top: 30px;
+            padding: 25px;
+        }
+
+        .container h2 {
+            font-size: 1.8rem;
+        }
+
+        .form-control {
+            font-size: 0.9rem;
+        }
+
+        .btn-outline-primary {
+            font-size: 1rem;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Add New Book</h2>
+    <form method="POST"> {% csrf_token %}
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Book Name</i></label>
+            <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Author Name</i></label>
+            <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">ISBN Number</i></label>
+            <input type="number" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Category</i></label>
+            <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary mt-4">Add Book</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Book is added successfully.")
+    document.location = "/view_books"
+    {% endif %}
+</script>
+{% endblock %}

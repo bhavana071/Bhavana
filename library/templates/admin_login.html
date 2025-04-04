@@ -1,0 +1,136 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+<!-- Add custom CSS styles here -->
+<style>
+    /* Overall container styling with a blue background */
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #007bff; /* Blue background */
+        color: white; /* White text to contrast with the blue background */
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title styling */
+    h1 {
+        font-size: 2.5rem;
+        color: white; /* White text for the title */
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        text-decoration: underline;
+    }
+
+    /* Note paragraph */
+    p {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #f8f9fa; /* Lighter text color for better readability */
+        margin-bottom: 20px;
+    }
+
+    /* Form field labels */
+    label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #f8f9fa; /* Lighter text for labels */
+    }
+
+    /* Form fields styling */
+    .form-control {
+        border-radius: 5px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        padding: 12px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #f8f9fa; /* White focus border for better contrast */
+        box-shadow: 0 0 8px rgba(248, 249, 250, 0.5);
+    }
+
+    /* Submit button styling */
+    .btn-outline-primary {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 5px;
+        border-color: #f8f9fa; /* Lighter border for the button */
+        color: #f8f9fa; /* Light text color */
+        background-color: transparent; /* Transparent button */
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #f8f9fa; /* White background on hover */
+        color: #007bff; /* Blue text on hover */
+    }
+
+    /* Alert message styling */
+    .alert {
+        font-size: 1rem;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        border-radius: 5px;
+    }
+
+    /* Spacing improvements */
+    .mt-4 {
+        margin-top: 30px;
+    }
+    
+    .mb-4 {
+        margin-bottom: 30px;
+    }
+
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <br>
+    <h1><u>Admin Login</u></h1><br>
+    <p><b>Note:</b> Only the admin can login from here. No student will be allowed to login.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% if alert %}
+        <div class="alert alert-danger" role="alert">
+            Invalid Username or Password.
+        </div>
+        {% endif %}
+
+        <div class="row mt-4">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Username</i></label>
+                <input type="text" class="form-control mt-2" name="username" placeholder="Enter Username" required>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Password</i></label>
+                <input type="password" class="form-control mt-2" name="password" placeholder="Enter Password" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary mt-4">Login</button>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Invalid Username or Password.")
+    document.location = "/admin_login"
+    {% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+<!-- Add custom CSS styles here -->
+<style>
+    /* Overall container styling */
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background: linear-gradient(to right, #007bff, #00c6ff); /* Gradient background */
+        color: white;
+        border-radius: 12px; /* Rounded corners for a modern look */
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    }
+
+    /* Title styling */
+    h1 {
+        font-size: 2.8rem;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+        text-decoration: underline;
+    }
+
+    /* Form field labels */
+    label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #f8f9fa; /* Light color for contrast */
+    }
+
+    /* Form fields styling */
+    .form-control {
+        border-radius: 8px; /* Rounded corners */
+        border: 1px solid #ffffff; /* White border to contrast with background */
+        padding: 15px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease; /* Smooth transition for focus */
+    }
+
+    .form-control:focus {
+        border-color: #00c6ff; /* Light blue border when focused */
+        box-shadow: 0 0 8px rgba(0, 198, 255, 0.6); /* Glow effect */
+        outline: none; /* Remove default outline */
+    }
+
+    /* Submit button styling */
+    .btn-outline-primary {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        border-color: #ffffff;
+        color: #ffffff;
+        background-color: transparent;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #ffffff; /* White background on hover */
+        color: #007bff; /* Blue text on hover */
+        transform: translateY(-3px); /* Subtle lift effect on hover */
+    }
+
+    /* Alert message styling */
+    .alert {
+        font-size: 1.1rem;
+        padding: 12px;
+        margin-bottom: 20px;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    /* Additional spacing and responsiveness */
+    .mt-4 {
+        margin-top: 30px;
+    }
+
+    .mb-4 {
+        margin-bottom: 30px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 767px) {
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2rem; /* Slightly smaller title on mobile */
+        }
+
+        .form-control {
+            font-size: 1rem; /* Adjust input font size */
+        }
+
+        .btn-outline-primary {
+            font-size: 1rem; /* Adjust button font size */
+        }
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <br>
+    <h1><u>Student Login</u></h1>
+    <form method="POST">
+        {% csrf_token %}
+        {% if alert %}
+        <div class="alert alert-danger" role="alert">
+            Invalid Username or Password.
+        </div>
+        {% endif %}
+
+        <div class="row mt-4">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Username</i></label>
+                <input type="text" class="form-control mt-2" name="username" placeholder="Enter Username" required>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-group col-md-12">
+                <label><i style="font-weight: bold;">Password</i></label>
+                <input type="password" class="form-control mt-2" name="password" placeholder="Enter Password" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-primary mt-4">Login</button>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Invalid Username or Password.")
+    document.location = "/student_login"
+    {% endif %}
+</script>
+{% endblock %}
